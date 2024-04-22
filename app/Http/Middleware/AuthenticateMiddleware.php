@@ -17,7 +17,7 @@ class AuthenticateMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            return redirect()->route('auth.login')->with('error', 'Mày phải đăng nhập');
+            return redirect()->route('auth.login');
         }
         return $next($request);
     }
