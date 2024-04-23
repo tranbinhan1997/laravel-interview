@@ -20,8 +20,8 @@ class CategoryController extends Controller
         if (Category::create([
             'category_name' => $data['category_name'],
         ])) {
-            return redirect(route('categories'))->with('success', 'Category created successfully!');;
+            return redirect(route('categories'))->with('success', 'Category created successfully!');
         } 
-        return redirect(route('categories'))->with('error', 'Failed to create category. Please try again.');;
+        return redirect(route('categories'))->with('error', 'Failed to create category. Please try again.');
     }
 }

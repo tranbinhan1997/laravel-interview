@@ -18,12 +18,12 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('categories') }}">Category</a>
-                <a class="collapse-item" href="cards.html">Product</a>
+                <a class="collapse-item" href="{{ route('products') }}">Product</a>
             </div>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ route('invoices') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Invoice</span>
         </a>
