@@ -12,7 +12,8 @@ class ProductController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('pages.product.index', compact('categories'));
+        $products = Product::orderBy('created_at', 'desc')->paginate(2);
+        return view('pages.product.index', compact('categories', 'products'));
     }
 
     public function create(ProductRequest $request)

@@ -19,6 +19,25 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <h2 class="h3 mb-0 text-gray-800 pt-4">Fruit Category List</h2>
+            <table class="table mt-2">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                            <th scope="row">{{ $category->id }}</th>
+                            <td>{{ ucfirst($category->category_name) }}</td>
+                        </tr>
+                    @endForeach
+                </tbody>
+              </table>
+              {{ $categories->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>

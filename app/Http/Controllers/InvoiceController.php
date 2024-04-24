@@ -7,13 +7,15 @@ use App\Models\Product;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class InvoiceController extends Controller
 {
     public function index()
     {
         $products = Product::all();
-        return view('pages.invoice.index', compact('products'));
+        $invoices = Invoice::orderBy('created_at', 'desc')->paginate(2);
+        return view('pages.invoice.index', compact('products', 'invoices'));
     }
 
     public function create(Request $request)
@@ -121,5 +123,24 @@ class InvoiceController extends Controller
         $invoice->save();
 
         return redirect()->back()->with('success', 'Invoice updated successfully');
+    }
+
+    public function exportPDF($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        $data = ['invoice' => $invoice];
+
+        $pdf = PDF::loadView('pdf.invoice',  $data);
+        return $pdf->stream('invoice.pdf');
+    }
+
+    public function delete($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        if($invoice->delete()) {
+            return redirect()->route('invoices')->with('success', 'Invoice deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Invoice deleted failed!');
+        }
     }
 }

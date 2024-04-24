@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::post('/do-login', [AuthController::class, 'login'])->name('auth.do-login'
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('authenticate');
+
+Route::get('/profile', [UserController::class, 'index'])->name('profile')->middleware('authenticate');
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories')->middleware('authenticate');
 Route::post('/categories/add', [CategoryController::class, 'create'])->name('categories-add')->middleware('authenticate');
 Route::get('/products', [ProductController::class, 'index'])->name('products')->middleware('authenticate');
@@ -36,3 +40,6 @@ Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices')->
 Route::post('/invoices/add', [InvoiceController::class, 'create'])->name('invoices-add')->middleware('authenticate');
 Route::get('/invoices/{id}', [InvoiceController::class, 'edit'])->name('invoices-edit')->middleware('authenticate');
 Route::post('/invoices/{id}', [InvoiceController::class, 'update'])->name('invoices-update')->middleware('authenticate');
+
+Route::get('/invoices/pdf/{id}',[InvoiceController::class, 'exportPDF'])->name('invoices-pdf')->middleware('authenticate');
+Route::post('/invoices/delete/{id}',[InvoiceController::class, 'delete'])->name('invoices-delete')->middleware('authenticate');

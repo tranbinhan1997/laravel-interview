@@ -55,6 +55,31 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
+                <h2 class="h3 mb-0 text-gray-800 pt-4">Fruit Item List</h2>
+                <table class="table mt-2">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($products as $product)
+                            <tr>
+                                <th scope="row">{{ $product->id }}</th>
+                                <td>{{ ucfirst($product->category->category_name) }}</td>
+                                <td>{{ ucfirst($product->product_name) }}</td>
+                                <td>{{ ucfirst($product->unit) }}</td>
+                                <td>{{ number_format($product->price) }}</td>
+                            </tr>
+                        @endForeach
+                    </tbody>
+                </table>
+              {{ $products->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>
